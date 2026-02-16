@@ -33,10 +33,11 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // If the user is not signed in and the path is not /login, redirect to /login
+  // If the user is not signed in and the path is not /login or public, redirect to /login
   if (
     !user &&
     !request.nextUrl.pathname.startsWith("/login") &&
+    !request.nextUrl.pathname.startsWith("/reports/share") &&
     request.nextUrl.pathname !== "/"
   ) {
     const url = request.nextUrl.clone();

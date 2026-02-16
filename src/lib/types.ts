@@ -84,6 +84,19 @@ export interface LeadNote {
   created_at: string;
 }
 
+export interface Report {
+  id: string;
+  company_id: string;
+  title: string;
+  type: string | null;
+  date_range_start: string | null;
+  date_range_end: string | null;
+  share_token: string | null;
+  share_expires: string | null;
+  file_url: string | null;
+  created_at: string;
+}
+
 export interface ChannelWithLeads extends Channel {
   total_leads: number;
 }

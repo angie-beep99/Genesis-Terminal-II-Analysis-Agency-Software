@@ -12,3 +12,23 @@ body {
   color: #eaeaea;
   background: #09090b;
 }
+
+@media print {
+  body {
+    background: white;
+    color: #111;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .print\:h-48 {
+    height: 12rem !important;
+  }
+
+  .print\:py-4 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+}
