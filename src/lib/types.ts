@@ -117,6 +117,27 @@ export interface InboxMessage {
   created_at: string;
 }
 
+export interface Company {
+  id: string;
+  name: string;
+  industry: string | null;
+  website: string | null;
+  logo_url: string | null;
+  contact_email: string | null;
+  partnership_start: string | null;
+  terminal_ownership_date: string | null;
+  created_at: string;
+}
+
+export interface User {
+  id: string;
+  company_id: string | null;
+  email: string;
+  role: "owner" | "admin" | "member" | "viewer";
+  full_name: string | null;
+  created_at: string;
+}
+
 export interface ChannelWithLeads extends Channel {
   total_leads: number;
 }
