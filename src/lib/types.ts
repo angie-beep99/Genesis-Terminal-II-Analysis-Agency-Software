@@ -97,6 +97,26 @@ export interface Report {
   created_at: string;
 }
 
+export interface InboxThread {
+  id: string;
+  company_id: string;
+  subject: string;
+  category: "update" | "question" | "report" | "action_required";
+  is_read: boolean;
+  last_message_at: string | null;
+  created_at: string;
+}
+
+export interface InboxMessage {
+  id: string;
+  thread_id: string;
+  company_id: string;
+  sender_type: "team" | "client";
+  sender_name: string;
+  content: string;
+  created_at: string;
+}
+
 export interface ChannelWithLeads extends Channel {
   total_leads: number;
 }

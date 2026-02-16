@@ -24,7 +24,12 @@ const navItems = [
   { href: "/settings", label: "Settings", icon: Settings },
 ];
 
-export default function Sidebar({ userEmail }: { userEmail: string }) {
+interface SidebarProps {
+  userEmail: string;
+  inboxUnreadCount?: number;
+}
+
+export default function Sidebar({ userEmail, inboxUnreadCount = 0 }: SidebarProps) {
   const pathname = usePathname();
 
   return (
@@ -45,6 +50,7 @@ export default function Sidebar({ userEmail }: { userEmail: string }) {
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           const Icon = item.icon;
+          const showBadge = item.href === "/inbox" && inboxUnreadCount > 0;
           return (
             <Link
               key={item.href}
@@ -56,7 +62,12 @@ export default function Sidebar({ userEmail }: { userEmail: string }) {
               }`}
             >
               <Icon size={18} />
-              <span>{item.label}</span>
+              <span className="flex-1">{item.label}</span>
+              {showBadge && (
+                <span className="flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-gold px-1.5 text-[10px] font-semibold text-background">
+                  {inboxUnreadCount}
+                </span>
+              )}
             </Link>
           );
         })}

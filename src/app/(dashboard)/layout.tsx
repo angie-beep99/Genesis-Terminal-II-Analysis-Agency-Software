@@ -17,9 +17,15 @@ export default async function DashboardLayout({
     redirect("/login");
   }
 
+  // Fetch unread inbox thread count
+  const { count: unreadCount } = await supabase
+    .from("inbox_threads")
+    .select("*", { count: "exact", head: true })
+    .eq("is_read", false);
+
   return (
     <div className="flex h-screen overflow-hidden">
-      <Sidebar userEmail={user.email ?? "User"} />
+      <Sidebar userEmail={user.email ?? "User"} inboxUnreadCount={unreadCount ?? 0} />
       <div className="flex flex-1 flex-col overflow-hidden">
         <TopBar />
         <main className="flex-1 overflow-y-auto bg-background p-6">
