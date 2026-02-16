@@ -65,6 +65,25 @@ export interface Insight {
   created_at: string;
 }
 
+export interface LeadActivity {
+  id: string;
+  lead_id: string;
+  company_id: string;
+  action: string;
+  details: string | null;
+  created_by: string | null;
+  created_at: string;
+}
+
+export interface LeadNote {
+  id: string;
+  lead_id: string;
+  company_id: string;
+  note: string;
+  created_by: string | null;
+  created_at: string;
+}
+
 export interface ChannelWithLeads extends Channel {
   total_leads: number;
 }
