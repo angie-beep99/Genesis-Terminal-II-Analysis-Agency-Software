@@ -135,6 +135,7 @@ export interface User {
   email: string;
   role: "owner" | "admin" | "member" | "viewer";
   full_name: string | null;
+  is_admin: boolean;
   created_at: string;
 }
 

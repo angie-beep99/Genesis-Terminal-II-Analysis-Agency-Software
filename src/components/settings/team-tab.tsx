@@ -25,6 +25,7 @@ const sampleMembers: User[] = [
     email: "mark@morrisonlaw.example.com",
     role: "owner",
     full_name: "Mark Morrison",
+    is_admin: false,
     created_at: "2024-06-01T00:00:00Z",
   },
   {
@@ -33,6 +34,7 @@ const sampleMembers: User[] = [
     email: "lisa@morrisonlaw.example.com",
     role: "admin",
     full_name: "Lisa Morrison",
+    is_admin: false,
     created_at: "2024-06-15T00:00:00Z",
   },
   {
@@ -41,6 +43,7 @@ const sampleMembers: User[] = [
     email: "james@morrisonlaw.example.com",
     role: "member",
     full_name: "James Parker",
+    is_admin: false,
     created_at: "2024-08-01T00:00:00Z",
   },
   {
@@ -49,6 +52,7 @@ const sampleMembers: User[] = [
     email: "anna@morrisonlaw.example.com",
     role: "viewer",
     full_name: "Anna Chen",
+    is_admin: false,
     created_at: "2024-09-01T00:00:00Z",
   },
 ];
@@ -78,6 +82,7 @@ export default function TeamTab({ users, currentUserEmail }: TeamTabProps) {
       email: inviteEmail.trim(),
       role: inviteRole,
       full_name: inviteEmail.split("@")[0] ?? inviteEmail,
+      is_admin: false,
       created_at: new Date().toISOString(),
     };
     setMembers((prev) => [...prev, newMember]);
