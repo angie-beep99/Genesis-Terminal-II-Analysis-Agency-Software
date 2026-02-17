@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Save, CheckCircle } from "lucide-react";
 import { format, parseISO, differenceInDays } from "date-fns";
 import { updateCompany } from "@/app/(dashboard)/settings/actions";
+import { useToast } from "@/components/toast";
 import type { Company } from "@/lib/types";
 
 interface CompanyTabProps {
@@ -40,6 +41,8 @@ export default function CompanyTab({ company }: CompanyTabProps) {
     : 0;
   const progressPct = Math.min(100, Math.max(0, (elapsed / totalDays) * 100));
 
+  const { toast } = useToast();
+
   async function handleSave() {
     setSaving(true);
     setSaved(false);
@@ -51,6 +54,7 @@ export default function CompanyTab({ company }: CompanyTabProps) {
     });
     setSaving(false);
     setSaved(true);
+    toast("Settings saved");
     setTimeout(() => setSaved(false), 2000);
   }
 

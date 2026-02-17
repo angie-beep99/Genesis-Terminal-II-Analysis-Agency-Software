@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronDown, DollarSign, Target, Clock, TrendingUp } from "lucide-react";
 import { format, parseISO, differenceInDays } from "date-fns";
+import { useToast } from "@/components/toast";
 import type { Lead, LeadActivity, LeadNote } from "@/lib/types";
 
 interface LeadDetailPanelProps {
@@ -52,6 +53,7 @@ export default function LeadDetailPanel({
   const [showStatusDropdown, setShowStatusDropdown] = useState(false);
   const [editingValue, setEditingValue] = useState(false);
   const [newNote, setNewNote] = useState("");
+  const { toast } = useToast();
 
   if (!lead) return null;
 
@@ -313,7 +315,7 @@ export default function LeadDetailPanel({
                     className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-text-primary placeholder-text-muted outline-none focus:border-gold"
                   />
                   <button
-                    onClick={() => setNewNote("")}
+                    onClick={() => { setNewNote(""); toast("Note added"); }}
                     disabled={!newNote.trim()}
                     className="mt-2 rounded-md bg-gold px-4 py-1.5 text-xs font-medium text-background transition-opacity hover:opacity-90 disabled:opacity-30"
                   >

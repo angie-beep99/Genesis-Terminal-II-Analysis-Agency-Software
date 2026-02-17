@@ -1,7 +1,8 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Bell } from "lucide-react";
+import { Search } from "lucide-react";
+import NotificationBell from "./notifications";
 
 const pageTitles: Record<string, string> = {
   "/overview": "Overview",
@@ -18,17 +19,28 @@ export default function TopBar() {
   const title = pageTitles[pathname] || "Dashboard";
 
   return (
-    <header className="flex h-14 items-center justify-between border-b border-border bg-background px-6">
+    <header className="flex h-14 items-center justify-between border-b border-border bg-background px-6 pl-14 md:pl-6">
       <h1 className="text-lg font-semibold text-text-primary">{title}</h1>
 
-      <div className="flex items-center gap-4">
-        {/* Notification bell */}
-        <button className="relative text-text-muted transition-colors hover:text-text-primary">
-          <Bell size={20} />
-          <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-negative text-[10px] font-medium text-white">
-            3
-          </span>
+      <div className="flex items-center gap-3">
+        {/* Cmd+K hint */}
+        <button
+          onClick={() => {
+            document.dispatchEvent(
+              new KeyboardEvent("keydown", { key: "k", metaKey: true })
+            );
+          }}
+          className="hidden items-center gap-2 rounded-lg border border-border bg-card px-3 py-1.5 text-xs text-text-muted transition-colors hover:border-gold sm:flex"
+        >
+          <Search size={12} />
+          Search
+          <kbd className="rounded border border-border bg-background px-1 py-0.5 text-[10px]">
+            ⌘K
+          </kbd>
         </button>
+
+        {/* Notification bell */}
+        <NotificationBell />
 
         {/* Sample View badge */}
         <span className="rounded-full border border-border bg-card px-3 py-1 text-xs text-text-muted">

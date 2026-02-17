@@ -104,7 +104,7 @@ function Toggle({
       }`}
     >
       <span
-        className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition-transform ${
+        className={`absolute top-0.5 h-4 w-4 rounded-full bg-text-primary transition-transform ${
           checked ? "left-[1.125rem]" : "left-0.5"
         }`}
       />

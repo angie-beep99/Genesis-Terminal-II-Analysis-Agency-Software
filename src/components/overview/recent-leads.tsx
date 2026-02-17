@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Users } from "lucide-react";
 import type { Lead } from "@/lib/types";
 
 interface RecentLeadsProps {
@@ -41,6 +42,14 @@ export default function RecentLeads({ leads }: RecentLeadsProps) {
         Recent Leads
       </h3>
       <div className="overflow-x-auto">
+        {recent.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-8 text-center">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background">
+              <Users size={16} className="text-text-muted" />
+            </div>
+            <p className="text-xs text-text-muted">No leads yet. They&apos;ll appear here as your campaigns generate enquiries.</p>
+          </div>
+        ) : (
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border text-left text-xs text-text-muted">
@@ -74,6 +83,7 @@ export default function RecentLeads({ leads }: RecentLeadsProps) {
             ))}
           </tbody>
         </table>
+        )}
       </div>
     </motion.div>
   );

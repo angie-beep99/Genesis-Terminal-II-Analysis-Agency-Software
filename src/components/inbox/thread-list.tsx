@@ -1,6 +1,7 @@
 "use client";
 
 import { formatDistanceToNow, parseISO } from "date-fns";
+import { Inbox } from "lucide-react";
 import type { InboxThread, InboxMessage } from "@/lib/types";
 
 interface ThreadListProps {
@@ -53,6 +54,14 @@ export default function ThreadList({
         <h2 className="text-sm font-medium text-text-primary">Threads</h2>
       </div>
       <div className="flex-1 overflow-y-auto">
+        {threads.length === 0 && (
+          <div className="flex flex-col items-center justify-center px-4 py-12 text-center">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background">
+              <Inbox size={16} className="text-text-muted" />
+            </div>
+            <p className="text-xs text-text-muted">Inbox is empty</p>
+          </div>
+        )}
         {threads.map((thread) => {
           const isActive = thread.id === activeThreadId;
           const cat = categoryStyles[thread.category] ?? categoryStyles.update;

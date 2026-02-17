@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Download, CheckCircle } from "lucide-react";
 import { exportTableCsv } from "@/app/(dashboard)/settings/actions";
+import { useToast } from "@/components/toast";
 import type { Lead, DailyPerformance, Channel } from "@/lib/types";
 
 interface DataTabProps {
@@ -24,6 +25,7 @@ function downloadCsv(csv: string, filename: string) {
 
 export default function DataTab({ leads, performance, channels }: DataTabProps) {
   const [downloadedKey, setDownloadedKey] = useState<string | null>(null);
+  const { toast } = useToast();
 
   async function handleExport(
     table: "leads" | "daily_performance" | "channels",
@@ -33,6 +35,7 @@ export default function DataTab({ leads, performance, channels }: DataTabProps) 
     if (result.csv) {
       downloadCsv(result.csv, filename);
       setDownloadedKey(table);
+      toast("Data exported successfully");
       setTimeout(() => setDownloadedKey(null), 2000);
     }
   }

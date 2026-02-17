@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import { parseISO } from "date-fns";
 import LeadRow from "./lead-row";
 import LeadDetailPanel from "./lead-detail-panel";
+import { EmptyLeads } from "@/components/empty-state";
 import type { Lead, LeadActivity, LeadNote } from "@/lib/types";
 
 interface LeadsContentProps {
@@ -203,9 +204,7 @@ export default function LeadsContent({ leads, activities, notes }: LeadsContentP
 
         {/* Rows */}
         {filtered.length === 0 ? (
-          <div className="px-5 py-8 text-center text-sm text-text-muted">
-            No leads match your filters.
-          </div>
+          <EmptyLeads />
         ) : (
           filtered.map((lead) => (
             <LeadRow

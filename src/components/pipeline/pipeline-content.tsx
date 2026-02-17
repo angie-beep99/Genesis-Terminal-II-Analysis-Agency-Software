@@ -6,6 +6,7 @@ import { differenceInDays, parseISO } from "date-fns";
 import KanbanBoard from "./kanban-board";
 import MobileListView from "./mobile-list-view";
 import { updateLeadStatus } from "@/app/(dashboard)/pipeline/actions";
+import { useToast } from "@/components/toast";
 import type { Lead } from "@/lib/types";
 
 interface PipelineContentProps {
@@ -70,6 +71,7 @@ function formatCurrency(n: number): string {
 
 export default function PipelineContent({ leads: initialLeads }: PipelineContentProps) {
   const [leads, setLeads] = useState(initialLeads);
+  const { toast } = useToast();
 
   // Summary stats
   const summary = useMemo(() => {
@@ -140,9 +142,12 @@ export default function PipelineContent({ leads: initialLeads }: PipelineContent
             l.id === leadId ? { ...l, status: oldStatus } : l
           )
         );
+        toast("Failed to update lead status", "error");
+      } else {
+        toast(`Lead moved to ${newStatus.replace("_", " ")}`);
       }
     },
-    [leads]
+    [leads, toast]
   );
 
   const summaryItems = [

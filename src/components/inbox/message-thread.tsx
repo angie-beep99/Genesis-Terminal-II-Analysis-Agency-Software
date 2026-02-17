@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Send } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { sendMessage, markThreadAsRead } from "@/app/(dashboard)/inbox/actions";
+import { useToast } from "@/components/toast";
 import type { InboxThread, InboxMessage } from "@/lib/types";
 
 interface MessageThreadProps {
@@ -43,6 +44,7 @@ export default function MessageThread({
   const [sending, setSending] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const markedReadRef = useRef(false);
+  const { toast } = useToast();
 
   const cat = categoryStyles[thread.category] ?? categoryStyles.update;
 
@@ -82,8 +84,9 @@ export default function MessageThread({
 
     const result = await sendMessage(thread.id, thread.company_id, content);
     if (result.error) {
-      // Could remove the optimistic message here, but keeping it simple
-      console.error("Failed to send:", result.error);
+      toast("Failed to send message", "error");
+    } else {
+      toast("Message sent");
     }
 
     setSending(false);
